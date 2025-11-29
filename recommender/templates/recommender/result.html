@@ -1,0 +1,332 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- BebasNeue -->
+    <style>
+        @font-face {
+            font-family: 'BebasNeue';
+            src: url("{% static 'recommender/fonts/BebasNeue.otf' %}") format('opentype');
+            font-weight: normal;
+        }
+    </style>
+
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CineFinds | Recommendations</title>
+    <link rel="shortcut icon" href="{% static 'logo.png' %}">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="{% static 'recommender/cursor.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+
+
+    <style>
+
+        /* ---------------------------------------------------------
+           FLOATING HOME ICON (Stagnant ⌂ with breathing mint glow)
+        --------------------------------------------------------- */
+        /* Remove browser focus outline + blue link highlight */
+        .home-icon,
+        .home-icon:focus,
+        .home-icon:hover,
+        .home-icon:active,
+        .home-icon:visited {
+            outline: none !important;
+            text-decoration: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            color: #82D4BB !important; /* Keep mint */
+        }
+
+        .home-icon {
+            position: absolute;
+            top: 45px;
+            right: 60px;
+            font-size: 48px;
+            color: #82D4BB;
+            cursor: pointer;
+            text-shadow: 0 0 15px #82D4BB88;
+            animation: homeGlow 3s infinite ease-in-out;
+            z-index: 500;
+        }
+
+        @keyframes homeGlow {
+            0% { text-shadow: 0 0 15px #82D4BB88; }
+            50% { text-shadow: 0 0 40px #82D4BBcc; }
+            100% { text-shadow: 0 0 15px #82D4BB88; }
+        }
+
+        .home-icon:hover {
+            color: #82D4BB !important;  /* Prevent blue tint */
+            text-shadow: 0 0 50px #82D4BBee !important;
+        }
+
+        /* ---------------------------------------------------------
+           GLOBAL PAGE STYLE
+        --------------------------------------------------------- */
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(180deg, #000, #0a0a0a, #111);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1, h2, .page-title {
+            font-family: 'BebasNeue', sans-serif !important;
+        }
+
+
+        /* ---------------------------------------------------------
+           CURSOR GLOW
+        --------------------------------------------------------- */
+        .cursor-dot {
+            background: #82D4BB !important;
+            box-shadow: 0 0 15px #82D4BB !important;
+            width: 12px !important;
+            height: 12px !important;
+            border-radius: 50%;
+        }
+
+        .cursor-dot-outline {
+            border: 2px solid #82D4BB88 !important;
+            box-shadow: 0 0 25px #82D4BB88 !important;
+            width: 25px !important;
+            height: 25px !important;
+            border-radius: 50%;
+        }
+
+
+        /* ---------------------------------------------------------
+           HEADER & LOGO (Matches index.html)
+        --------------------------------------------------------- */
+        .header {
+            width: 100%;
+            padding: 25px 50px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 200;
+        }
+
+        .logo {
+            font-family: 'BebasNeue';
+            font-size: 55px;
+            letter-spacing: 3px;
+            color: #82D4BB;
+        }
+
+
+        /* ---------------------------------------------------------
+           PAGE TITLE
+        --------------------------------------------------------- */
+        .title-section {
+            margin-top: 160px;
+            padding-left: 50px;
+        }
+
+        .page-title {
+            font-size: 70px;
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
+
+        .title-highlight {
+            color: #82D4BB;
+        }
+
+
+        /* ---------------------------------------------------------
+           RESULT CARDS (Netflix dark)
+        --------------------------------------------------------- */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 35px;
+            padding: 40px 50px;
+        }
+
+        .movie-card {
+            background: #141414;
+            border: 1px solid #82D4BB33;
+            padding: 22px;
+            border-radius: 12px;
+            transition: 0.25s ease;
+            box-shadow: 0 0 10px #000;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.06);
+            border-color: #82D4BBaa;
+            box-shadow: 0 0 25px #82D4BB55;
+        }
+
+        .movie-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #82D4BB;
+        }
+
+        .movie-meta {
+            font-size: 15px;
+            color: #ccc;
+            margin-bottom: 6px;
+        }
+
+        .movie-link {
+            display: inline-block;
+            margin-top: 12px;
+            color: #82D4BB;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s ease;
+        }
+
+        .movie-link:hover {
+            color: #a8eee1;
+            text-shadow: 0 0 10px #82D4BB99;
+        }
+
+        /* Cinematic Slow Smoke Background — Enhanced Wave Visibility */
+        .fog-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            background-repeat: no-repeat;
+            background-size: cover;
+            filter: blur(55px);
+            opacity: 0.50;
+            z-index: -1;
+            animation: smokeWave 45s infinite ease-in-out alternate;
+        }
+
+        /* Top → down gradient with stronger teal at the bottom */
+        .fog1 {
+            background: radial-gradient(
+                circle at 50% -10%,
+                rgba(0, 0, 0, 0.92) 0%,
+                rgba(0, 0, 0, 0.75) 20%,
+                rgba(20, 40, 40, 0.55) 55%,
+                rgba(130, 212, 187, 0.35) 85%,
+                rgba(130, 212, 187, 0.55) 100%
+            );
+        }
+
+        .fog2 {
+            background: radial-gradient(
+                circle at 50% 120%,
+                rgba(130, 212, 187, 0.65) 0%,
+                rgba(90, 160, 150, 0.55) 35%,
+                rgba(40, 80, 70, 0.30) 75%,
+                rgba(0, 0, 0, 0) 100%
+            );
+            animation-duration: 70s;
+            opacity: 0.45;
+        }
+
+        /* Wave-like smoke movement */
+        @keyframes smokeWave {
+            0% {
+                transform: translate(-14%, -10%) scale(1.25)
+                        skewX(4deg) skewY(-2deg)
+                        rotate(0deg);
+                opacity: 0.45;
+            }
+            25% {
+                transform: translate(10%, -4%) scale(1.28)
+                        skewX(-3deg) skewY(2deg)
+                        rotate(1deg);
+                opacity: 0.52;
+            }
+            50% {
+                transform: translate(-8%, 6%) scale(1.32)
+                        skewX(5deg) skewY(-3deg)
+                        rotate(-2deg);
+                opacity: 0.50;
+            }
+            75% {
+                transform: translate(6%, 12%) scale(1.30)
+                        skewX(-4deg) skewY(1deg)
+                        rotate(1deg);
+                opacity: 0.54;
+            }
+            100% {
+                transform: translate(-10%, 5%) scale(1.27)
+                        skewX(3deg) skewY(-1deg)
+                        rotate(-1deg);
+                opacity: 0.48;
+            }
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Fog Background -->
+    <div class="fog-layer fog1"></div>
+    <div class="fog-layer fog2"></div>
+
+    <!-- HOME ICON -->
+    <a href="/" class="home-icon">⌂</a>
+
+    <!-- LOGO -->
+    <div class="header">
+        <div class="logo">CINEFINDS</div>
+    </div>
+
+
+    <!-- PAGE TITLE -->
+    <div class="title-section">
+        <h2 class="page-title">
+            Movies like <span class="title-highlight">“{{ input_movie_name }}”</span>
+        </h2>
+    </div>
+
+
+    <!-- RESULTS GRID -->
+    <div class="results-grid">
+        {% if recomendation_found %}
+            {% for m in recommended_movies %}
+                <div class="movie-card">
+
+                    <div class="movie-title">
+                        <i class="fa fa-film"></i> {{ m.movie_title }}
+                    </div>
+
+                    <div class="movie-meta">Directed by: {{ m.movie_director }}</div>
+                    <div class="movie-meta">Release: {{ m.movie_release_date }}</div>
+
+                    <a target="_blank" href="{{ m.google_link }}" class="movie-link">View on Google →</a>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+
+    <!-- CURSOR GLOW -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-dot-outline"></div>
+    <script src="{% static 'recommender/cursor.js' %}"></script>
+
+</body>
+
+</html>
