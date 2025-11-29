@@ -1,39 +1,47 @@
-# 🎬 Movie Recommendation System
+# 🎬 CineFinds — Movie Recommendation System
 
-A personalized movie discovery app powered by Machine Learning. Enter a movie you love — get smart recommendations instantly.
+> A minimal, Netflix-inspired movie recommender powered by cosine similarity and a smooth cinematic UI.
 
 ---
 
-## Features
+## 📛 Badges
 
-- 🔍 Smart search with auto-suggest  
-- 🎞️ Movie similarity-based recommendations  
-- 💻 Works locally or can be deployed online  
-- 🎨 Fully customizable UI (Netflix-style redesign in progress)
+<p align="left">
+  <img src="https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Django-4.x-green?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Machine%20Learning-Cosine%20Similarity-red?style=for-the-badge">
+  <img src="https://img.shields.io/badge/UI-Netflix%20Dark-black?style=for-the-badge">
+  <img src="https://img.shields.io/github/stars/udii05/Movie-Recommendation-System?style=for-the-badge">
+</p>
+
+---
+
+## 🧠 Tech Stack
+
+| Category | Technologies |
+|---------|--------------|
+| Backend | Django, Python |
+| Data | Pandas, PyArrow, Parquet |
+| Frontend | HTML, CSS, jQuery UI |
+| ML Logic | Cosine Similarity |
+| UI Theme | Netflix Style (Mint)|
 
 ---
 
 ## 🛠️ Getting Started
 
-### **1️⃣ Clone the Repository**
+```bash
+git clone https://github.com/udii05/Movie-Recommendation-System.git
+cd Movie-Recommendation-System
 
-```sh
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-cd movie-recommendation-system
-```
-### **2️⃣ Create a Virtual Environment**
-```sh
-python -m venv env
-```
-To activate it:
-| OS        | Command                   |
-| --------- | ------------------------- |
-| Windows   | `env\Scripts\activate`    |
-| Mac/Linux | `source env/bin/activate` |
-### **3️⃣ Install Dependencies**
-```sh
+python -m venv venv
+venv\Scripts\activate   # or source venv/bin/activate (Mac/Linux)
+
 pip install -r requirements.txt
+python manage.py runserver
 ```
+---
+
 ### **▶️ Run the Application**
 Once setup is complete, start the development server:
 ```sh
@@ -41,32 +49,36 @@ python main.py
 ```
 Then open your browser and go to:
 ```sh
-http://localhost:5000
+http://127.0.0.1:8000/
+
 ```
 ### **🧠 Model Overview**
 This system uses a similarity-based recommendation algorithm trained on real-world movie metadata.
 Training or replacing the model can be done using the included Jupyter Notebook.
 ### **📂 Project Structure**
 ```tree
-📁 movie-recommendation-system
- ┣ 📁 static/
- ┃ ┣ images/
- ┃ ┣ css/
- ┃ ┗ js/
- ┣ 📁 templates/
- ┣ main.py
- ┣ model.pkl
- ┗ requirements.txt
+📁movie-recommendation-system/
+│── views.py
+│── urls.py
+│── templates/
+│   ├── index.html
+│   └── result.html
+│── static/recommender/
+│   ├── cursor.css
+│   ├── navbar.css
+│   ├── page.css
+│   └── fog animations
+movie_recommendation/
+static/
+│── top_2k_movie_data.parquet
+│── demo_model.parquet
+manage.py
+requirements.txt
 ```
-### **☁️ Deployment Options**
-You can deploy using platforms such as:
--Render
--Vercel + backend API
-AWS / Azure / GCP
-Docker (coming soon)
-Deployment instructions will be included in future versions.
 ### **⭐ Support**
-If you liked my project, please:
-- star the repository 
-- follow for updates 
-- share with others
+If you liked this project, please star the repo — it really motivates me.
+- and follow for more updates!
+---
+
+Udita Chakraborty
+<p align="left"> <a href="https://github.com/udii05"> <img src="https://img.shields.io/badge/GitHub-udii05-black?style=flat-square&logo=github"> </a> <a href="https://www.linkedin.com/in/udita-chakraborty-b890982a2/"> <img src="https://img.shields.io/badge/LinkedIn-Udita%20Chakraborty-blue?style=flat-square&logo=linkedin"> </a> <a href="https://www.instagram.com/u_dii05"> <img src="https://img.shields.io/badge/Instagram-@u_dii05-e84393?style=flat-square&logo=instagram"> </a> </p>
