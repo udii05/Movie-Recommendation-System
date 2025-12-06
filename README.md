@@ -11,7 +11,6 @@
   <img src="https://img.shields.io/badge/Django-4.x-green?style=for-the-badge">
   <img src="https://img.shields.io/badge/Machine%20Learning-Cosine%20Similarity-red?style=for-the-badge">
   <img src="https://img.shields.io/badge/UI-Netflix%20Dark-black?style=for-the-badge">
-  <img src="https://img.shields.io/github/stars/udii05/Movie-Recommendation-System?style=for-the-badge">
 </p>
 
 ---
